@@ -132,6 +132,13 @@ public class Game extends JPanel {
 						if (redWon || blackWon) {
 							switch (result) {
 							case 0:
+								removeMouseListener(this);
+								tableWidth = 8;
+								tableHeight = 8;
+								squares = new Square[tableWidth][tableHeight];
+								mode = false;
+								movingQueen = false;
+								player = Player.BLACK;
 								initGame(frame);
 								repaint();
 								break;
@@ -209,7 +216,7 @@ public class Game extends JPanel {
 		}
 		findAvailableSquares(-1, -1);
 		findAvailableSquares(-1, -1);
-		/*for (Square[] allSquares : squares) {
+		for (Square[] allSquares : squares) {
 			for (Square asquare : allSquares) {
 				if (asquare.type == Square.Type.BLACK_PLAYER)
 					asquare.type = Square.Type.EMPTY;
@@ -219,7 +226,7 @@ public class Game extends JPanel {
 				squares[3][5].type = Square.Type.RED_QUEEN;
 				squares[2][6].type = Square.Type.BLACK_QUEEN;
 			}
-		}*/
+		}
 	}
 
 	private void findAvailableSquares(int x, int y) {
