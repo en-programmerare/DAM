@@ -1,24 +1,34 @@
 package src.main;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Frame extends JFrame {
 	
 	Game game = new Game(this);
-	JLabel labelScoreboardTitle = new JLabel("Poäng", JLabel.CENTER);
-	
+	private JLabel labelScoreboardTitle = new JLabel("Poäng", JLabel.CENTER);
+	private JLabel labelScoreboardText = new JLabel("Svart: 0\nRöd: 0", JLabel.LEFT);
+	private JPanel scoreboard = new JPanel();
 	public Frame() {
 		setTitle("Dam");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		setVisible(true);
-		add(game);
+		setLayout(new BorderLayout());
+		add(game, BorderLayout.CENTER);
+		//add(scoreboard, BorderLayout.EAST);
 		setSize(500, 500);
 		setResizable(true);
 	}
 	
 	public Game getGame() {
 		return game;
+	}
+	
+	public void setScores(int black, int red) {
+		
 	}
 }
