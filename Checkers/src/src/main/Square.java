@@ -14,6 +14,7 @@ public class Square {
 	public Type type = Type.BLACK_QUEEN;
 	public boolean available;
 	public Square takenOutBy = null;
+	public boolean changePlayer = true;
 
 	public Square() {
 		this(0, 0, Type.EMPTY, false);

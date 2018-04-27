@@ -1,6 +1,8 @@
 package src.main;
 
 import java.awt.BorderLayout;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +23,7 @@ public class Frame extends JFrame {
 		add(game, BorderLayout.CENTER);
 		//add(scoreboard, BorderLayout.EAST);
 		setSize(500, 500);
+		setLocation(new Point( (Toolkit.getDefaultToolkit().getScreenSize().width - 500 ) / 2, ( Toolkit.getDefaultToolkit().getScreenSize().height - 500 ) / 2));
 		setResizable(true);
 	}
 	

@@ -35,7 +35,6 @@ public class Game extends JPanel {
 	 */
 	boolean mode = false;
 	boolean movingQueen = false;
-	boolean changePlayer = true;
 	Player player = Player.BLACK;
 
 	private MouseAdapter click = new MouseAdapter() {
@@ -43,7 +42,7 @@ public class Game extends JPanel {
 		public void mouseClicked(MouseEvent event) {
 			if (event.getComponent().equals(frame.getGame())) {
 				if (!mode) {
-					if (getSquareAt(event.getX(), event.getY()).available == true) {
+					if (getSquareAt(event.getX(), event.getY()).available) {
 						System.out.println("Du klickade på en " + getSquareAt(event.getX(), event.getY()).type);
 						if (getSquareAt(event.getX(), event.getY()).isQueen())
 							movingQueen = true;
@@ -62,7 +61,7 @@ public class Game extends JPanel {
 						mode = true;
 					}
 				} else {
-					if (getSquareAt(event.getX(), event.getY()).available == true) {
+					if (getSquareAt(event.getX(), event.getY()).available) {
 						if (player == Player.BLACK) {
 							if (movingQueen)
 								getSquareAt(event.getX(), event.getY()).type = Square.Type.BLACK_QUEEN;
@@ -70,7 +69,7 @@ public class Game extends JPanel {
 								getSquareAt(event.getX(), event.getY()).type = Square.Type.BLACK_PLAYER;
 							setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 							repaint();
-							if (changePlayer)
+							if (getSquareAt(event.getX(), event.getY()).changePlayer)
 								player = Player.RED;
 						} else {
 							if (player == Player.RED) {
@@ -81,7 +80,7 @@ public class Game extends JPanel {
 								}
 								setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 								repaint();
-								if (changePlayer)
+								if (getSquareAt(event.getX(), event.getY()).changePlayer)
 									player = Player.BLACK;
 							}
 						}
@@ -95,11 +94,11 @@ public class Game extends JPanel {
 						}
 						mode = false;
 						movingQueen = false;
-						changePlayer = true;
 						findAvailableSquares(-1, -1);
 						for (Square[] allSquares : squares) {
 							for (Square square : allSquares) {
 								square.takenOutBy = null;
+								square.changePlayer = true;
 							}
 						}
 						for (Square[] allSquares : squares) {
@@ -173,7 +172,6 @@ public class Game extends JPanel {
 		mode = copy.mode;
 		movingQueen = copy.movingQueen;
 		player = copy.player;
-		changePlayer = copy.changePlayer;
 	}
 
 	public Game(Frame frame) {
@@ -375,19 +373,8 @@ public class Game extends JPanel {
 						squares[x - 1][y + 1].available = true;
 				}
 			}
-			boolean success = false;
-			for (Square[] allsquares : squares) {
-				for (Square square : allsquares) {
-					if (square != null && square.available) {
-						success = true;
-					}
-				}
-			}
-			if (!success) {
-				squares[x][y].available = true;
-				changePlayer = false;
-			}
-			
+			squares[x][y].available = true;
+			squares[x][y].changePlayer = false;
 		}
 	}
 
