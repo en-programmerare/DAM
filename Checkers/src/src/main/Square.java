@@ -2,12 +2,6 @@ package src.main;
 
 import java.awt.Color;
 
-/**
- * Defines an in-game position
- * 
- * @author Mathias Dryselius
- *
- */
 public class Square {
 	public int x;
 	public int y;

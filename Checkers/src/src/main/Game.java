@@ -18,12 +18,7 @@ import java.net.URISyntaxException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/**
- * The class which draws the game.
- * 
- * @author Mathias Dryselius
- *
- */
+
 public class Game extends JPanel {
 
 	private int tableWidth = 8;
