@@ -11,9 +11,9 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,6 +24,8 @@ public class Game extends JPanel {
 	private int tableWidth = 8;
 	private int tableHeight = 8;
 	Frame frame;
+	private Image red;
+	private Image black;
 	Square[][] squares = new Square[tableWidth][tableHeight];
 	/**
 	 * false = take true = place
@@ -45,12 +47,11 @@ public class Game extends JPanel {
 						findAvailableSquares(getSquareAt(event.getX(), event.getY()).x,
 								getSquareAt(event.getX(), event.getY()).y);
 						Toolkit toolkit = Toolkit.getDefaultToolkit();
-						Image image;
-						if (player == Player.BLACK)
-							image = toolkit.getImage("black.png");
-						else
-							image = toolkit.getImage("red.png");
-						Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "img");
+						Cursor c;
+						if(player == Player.BLACK)
+							c = toolkit.createCustomCursor(black, new Point(0, 0), "img");
+						else 
+							c = toolkit.createCustomCursor(red, new Point(0, 0), "img");
 						setCursor(c);
 						repaint();
 						mode = true;
@@ -177,7 +178,16 @@ public class Game extends JPanel {
 	}
 
 	public Game(Frame frame) {
-		initGame(frame);
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		try {
+			black = toolkit.getImage(new URL("https://raw.githubusercontent.com/en-programmerare/DAM/master/Checkers/black.png"));
+			red = toolkit.getImage(new URL("https://raw.githubusercontent.com/en-programmerare/DAM/master/Checkers/red.png"));
+			initGame(frame);
+		}
+		catch(MalformedURLException exc) {
+			JOptionPane.showMessageDialog(frame.getGame(), "Ett fel har uppstått: ogiltlig URL",
+					"FEL", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public void initGame(Frame frame) {

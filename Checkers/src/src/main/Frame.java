@@ -1,6 +1,8 @@
 package src.main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 
@@ -13,11 +15,13 @@ public class Frame extends JFrame {
 	Game game = new Game(this);
 	private JLabel labelScoreboardTitle = new JLabel("Poäng", JLabel.CENTER);
 	private JLabel labelScoreboardText = new JLabel("Svart: 0\nRöd: 0", JLabel.LEFT);
+	private JLabel labelLoading = new JLabel("Laddar", JLabel.CENTER);
 	private JPanel scoreboard = new JPanel();
+	JPanel glass = (JPanel) getGlassPane();
+	
 	public Frame() {
 		setTitle("Dam");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
 		setVisible(true);
 		setLayout(new BorderLayout());
 		add(game, BorderLayout.CENTER);
