@@ -4,7 +4,7 @@ Ett enkelt damspel.
 
 ## Installation
 
-Ladda ner [den här JAR-filen](https://github.com/en-programmerare/DAM/blob/master/Checkers/Damspel.jar) och kör den. Kom ihåg att använda Java 8.
+Ladda ner [den här JAR-filen](https://github.com/en-programmerare/DAM/blob/master/Checkers/Damspel.jar) och kör den. Kom ihåg att använda Java 8. Det kan ta lite tid för den att starta. Programmet fungerar bara på PC och Mac.
 
 ## Spelet
 
